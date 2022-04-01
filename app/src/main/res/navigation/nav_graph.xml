@@ -90,6 +90,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="user"
+            app:argType="com.multi.trivia.data.model.User" />
 
     </fragment>
 
@@ -106,6 +109,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="category"
+            app:argType="com.multi.trivia.data.model.Category" />
 
     </fragment>
 
@@ -122,6 +128,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="questions"
+            app:argType="com.multi.trivia.data.model.Question[]" />
 
     </fragment>
 
@@ -150,6 +159,9 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="result"
+            app:argType="com.multi.trivia.data.model.Result" />
 
     </fragment>
 

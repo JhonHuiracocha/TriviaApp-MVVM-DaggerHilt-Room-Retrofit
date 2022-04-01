@@ -23,7 +23,7 @@ class CategoryAdapter(
         holder.bind(category)
 
         holder.binding.categoryContainer.setOnClickListener { view ->
-            val action = HomeFragmentDirections.actionHomeFragmentToSettingsFragment()
+            val action = HomeFragmentDirections.actionHomeFragmentToSettingsFragment(category)
             view.findNavController().navigate(action)
         }
     }

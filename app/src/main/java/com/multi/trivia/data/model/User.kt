@@ -12,5 +12,6 @@ data class User(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "user_id") val id: Long,
     @ColumnInfo(name = "username") val username: String,
     @ColumnInfo(name = "email") val email: String,
-    @ColumnInfo(name = "password") val password: String
+    @ColumnInfo(name = "password") val password: String,
+    @ColumnInfo(name = "status") val status: Boolean,
 ) : Parcelable
