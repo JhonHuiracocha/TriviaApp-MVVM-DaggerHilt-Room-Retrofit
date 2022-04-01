@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.multi.trivia.R
 import com.multi.trivia.databinding.FragmentResultsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +15,6 @@ class ResultsFragment : Fragment() {
 
     private var _binding: FragmentResultsBinding? = null
     private val binding get() = _binding!!
-
-    private val args: ResultsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +26,6 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val result = args.result
-
-        binding.result = result
 
         binding.btnPlayAgain.setOnClickListener {
 //            val action = ResultsFragmentDirections.actionResultsFragmentToHomeFragment()

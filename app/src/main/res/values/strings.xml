@@ -21,6 +21,7 @@
 
     <string name="username_example">SoyMulti</string>
     <string name="question_example">Which of the following Inuit languages was the FIRST to use a unique writing system not based on the Latin alphabet?</string>
+    <string name="next">Next</string>
 
     <string-array name="Amounts">
         <item>5</item>

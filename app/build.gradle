@@ -79,4 +79,7 @@ dependencies {
 
     // Codia
     implementation "com.github.alirezaashrafi:codia:$codia_version"
+
+    // Serialization / Deserialization
+    implementation "com.google.code.gson:gson:$gson_version"
 }

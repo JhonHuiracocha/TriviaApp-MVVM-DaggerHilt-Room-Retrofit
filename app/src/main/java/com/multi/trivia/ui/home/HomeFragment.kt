@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.multi.trivia.data.model.Category
 import com.multi.trivia.databinding.FragmentHomeBinding
 import com.multi.trivia.ui.adapter.CategoryAdapter
+import com.multi.trivia.utils.Constants.SESSION_MANAGER_NAME
+import com.multi.trivia.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -19,12 +22,13 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val args: HomeFragmentArgs by navArgs()
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private val categoryList: List<Category> = listOf(
         Category(9, "General Knowledge"),
         Category(10, "Entertainment: Books"),
-        Category(11, "Entertainment: Fill"),
+        Category(11, "Entertainment: Film"),
         Category(15, "Entertainment: Video Games"),
         Category(19, "Science: Mathematics"),
         Category(21, "Sports"),
@@ -43,7 +47,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = args.user
+        val user = sessionManager.getSession(SESSION_MANAGER_NAME)
 
         binding.user = user
 

@@ -5,20 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alirezaashrafi.library.Codia
 import com.multi.trivia.BuildConfig
 import com.multi.trivia.databinding.FragmentLoginBinding
 import com.multi.trivia.ui.auth.AuthViewModel
+import com.multi.trivia.utils.Constants.SESSION_MANAGER_NAME
+import com.multi.trivia.utils.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private lateinit var viewModel: AuthViewModel
 
@@ -60,6 +68,8 @@ class LoginFragment : Fragment() {
             return
         }
 
+        hideKeyboard(view)
+
         val encrytedPassword = codia.encode(password)
 
         viewModel.login(email, encrytedPassword).observe(viewLifecycleOwner) { user ->
@@ -69,8 +79,15 @@ class LoginFragment : Fragment() {
                 return@observe
             }
 
-            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(user)
+            sessionManager.setSession(SESSION_MANAGER_NAME, user)
+
+            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
             findNavController().navigate(action)
         }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = ContextCompat.getSystemService(view.context, InputMethodManager::class.java)
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

@@ -31,7 +31,7 @@ class WelcomeFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        binding.tvLeaderboard.setOnClickListener {
+        binding.btnLeaderboard.setOnClickListener {
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToLeaderboardFragment()
             findNavController().navigate(action)
         }
