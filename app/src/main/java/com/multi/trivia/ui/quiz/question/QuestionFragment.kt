@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.multi.trivia.R
 import com.multi.trivia.data.model.Question
 import com.multi.trivia.databinding.FragmentQuestionBinding
+import com.multi.trivia.ui.quiz.exit.ExitDialogDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,11 +25,11 @@ class QuestionFragment : Fragment() {
     private var _binding: FragmentQuestionBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var categoryName: String
     private lateinit var questions: Array<Question>
 
-    private var score = 0
+    private var points = 0
     private var currentQuestion = 0
-    private var isCorrect = false
 
     private val args: QuestionFragmentArgs by navArgs()
 
@@ -35,6 +37,16 @@ class QuestionFragment : Fragment() {
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.WRAP_CONTENT
     )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val action = QuestionFragmentDirections.actionQuestionFragmentToExitQuizDialog()
+            findNavController().navigate(action)
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,16 +60,27 @@ class QuestionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         questions = args.questions
+        categoryName = args.categoryName
 
         initQuiz(view, questions[currentQuestion])
+
+        observeSubscribers()
 
         binding.btnNext.setOnClickListener { checkQuestion(view) }
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun observeSubscribers() {
+        findNavController()
+            .currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData("selectedOption", "")
+            ?.observe(viewLifecycleOwner) { result ->
+                if (result == "Proceed") {
+                    val action = ExitDialogDirections.actionExitQuizDialogToHomeFragment()
+                    findNavController().navigate(action)
+                }
+            }
     }
 
     private fun initQuiz(view: View, question: Question) {
@@ -78,6 +101,7 @@ class QuestionFragment : Fragment() {
         layoutParams.setMargins(0, 0, 0, margin)
 
         val rbCorrectAnswer = createRadioButton(view, question.correctAnswer, rbColor, rbTextColor)
+        rbCorrectAnswer.id = R.id.correct_radio_button_id
         radioButtons.add(rbCorrectAnswer)
 
         val incorrectAnswers = question.incorrectAnswers
@@ -99,11 +123,12 @@ class QuestionFragment : Fragment() {
             return
         }
 
-        if (radioButtonCheckedId == R.id.correct_radio_button_id) score++
+        if (radioButtonCheckedId == R.id.correct_radio_button_id) points++
+
+        binding.radioGroup.clearCheck()
 
         nextQuestion(view)
     }
-
 
     private fun nextQuestion(view: View) {
         currentQuestion++
@@ -114,7 +139,8 @@ class QuestionFragment : Fragment() {
         }
 
         if (currentQuestion == questions.size) {
-            val action = QuestionFragmentDirections.actionQuizFragmentToResultsFragment()
+            val action =
+                QuestionFragmentDirections.actionQuizFragmentToResultsFragment(points, categoryName)
             findNavController().navigate(action)
         }
     }
@@ -130,11 +156,6 @@ class QuestionFragment : Fragment() {
         radioButton.setTextColor(textColor)
         radioButton.buttonTintList = ColorStateList.valueOf(rbColor)
         radioButton.layoutParams = layoutParams
-
-        if (!isCorrect) {
-            radioButton.id = R.id.correct_radio_button_id
-            isCorrect = true
-        }
 
         return radioButton
     }

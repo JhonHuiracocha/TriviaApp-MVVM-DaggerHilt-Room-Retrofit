@@ -27,12 +27,12 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnPlay.setOnClickListener {
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment()
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
             findNavController().navigate(action)
         }
 
-        binding.btnLeaderboard.setOnClickListener {
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToLeaderboardFragment()
+        binding.btnScores.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToScoreFragment()
             findNavController().navigate(action)
         }
 

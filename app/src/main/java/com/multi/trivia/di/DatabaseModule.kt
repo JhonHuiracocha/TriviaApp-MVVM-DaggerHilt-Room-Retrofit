@@ -1,12 +1,13 @@
 package com.multi.trivia.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.multi.trivia.data.database.TriviaDatabase
-import com.multi.trivia.data.database.UserDao
+import com.multi.trivia.data.database.dao.ScoreDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -16,17 +17,17 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideTriviaDatabase(application: Application): TriviaDatabase {
+    fun provideTriviaDatabase(@ApplicationContext context: Context): TriviaDatabase {
         return Room
-            .databaseBuilder(application, TriviaDatabase::class.java, "trivia.db")
+            .databaseBuilder(context, TriviaDatabase::class.java, "trivia.db")
             .fallbackToDestructiveMigration()
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideUserDao(triviaDatabase: TriviaDatabase): UserDao {
-        return triviaDatabase.userDao()
+    fun provideScoreDao(triviaDatabase: TriviaDatabase): ScoreDao {
+        return triviaDatabase.scoreDao()
     }
 
 }

@@ -24,7 +24,6 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var category: Category
-
     private lateinit var viewModel: QuizViewModel
 
     private val args: SettingsFragmentArgs by navArgs()
@@ -42,11 +41,13 @@ class SettingsFragment : Fragment() {
 
         category = args.category
 
-        initSpinners(view)
+        binding.category = category
+
+        initMenus()
 
         viewModel = ViewModelProvider(this)[QuizViewModel::class.java]
 
-        binding.bntStart.setOnClickListener { startQuiz(it) }
+        binding.bntStart.setOnClickListener { startQuiz() }
 
     }
 
@@ -55,19 +56,28 @@ class SettingsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initSpinners(view: View) {
+    private fun initMenus() {
         val amounts = resources.getStringArray(R.array.Amounts)
         val difficulties = resources.getStringArray(R.array.Difficulties)
         val types = resources.getStringArray(R.array.Types)
 
-        val amountsAdapter =
-            ArrayAdapter(view.context, android.R.layout.simple_expandable_list_item_1, amounts)
+        val amountsAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_expandable_list_item_1,
+            amounts
+        )
 
-        val difficultyAdapter =
-            ArrayAdapter(view.context, android.R.layout.simple_expandable_list_item_1, difficulties)
+        val difficultyAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_expandable_list_item_1,
+            difficulties
+        )
 
-        val typeAdapter =
-            ArrayAdapter(view.context, android.R.layout.simple_expandable_list_item_1, types)
+        val typeAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_expandable_list_item_1,
+            types
+        )
 
         binding.amountAutoComplete.setAdapter(amountsAdapter)
 
@@ -76,13 +86,13 @@ class SettingsFragment : Fragment() {
         binding.typeAutoComplete.setAdapter(typeAdapter)
     }
 
-    private fun startQuiz(view: View) {
+    private fun startQuiz() {
         val amount = binding.amountAutoComplete.text.trim()
         val difficulty = binding.difficultyAutoComplete.text.trim()
         val type = binding.typeAutoComplete.text.trim()
 
         if (amount.isEmpty() || difficulty.isEmpty() || type.isEmpty()) {
-            Toast.makeText(view.context, "You must enter all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "You must enter all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -103,14 +113,18 @@ class SettingsFragment : Fragment() {
                         val questionList = quizResponse.questionList
                         val questions: Array<Question> = questionList.map { it }.toTypedArray()
 
-                        val action = SettingsFragmentDirections.actionSettingsFragmentToQuizFragment(questions)
+                        val action =
+                            SettingsFragmentDirections.actionSettingsFragmentToQuizFragment(
+                                questions,
+                                category.name
+                            )
                         findNavController().navigate(action)
 
                         return@observe
                     }
 
                     Toast.makeText(
-                        view.context,
+                        requireContext(),
                         "No quiz found with these settings",
                         Toast.LENGTH_SHORT
                     ).show()

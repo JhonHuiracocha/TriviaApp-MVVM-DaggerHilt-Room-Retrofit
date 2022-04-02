@@ -2,6 +2,7 @@ package com.multi.trivia.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,29 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         //Toolbar
-        setSupportActionBar(binding.toolbar)
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.welcomeFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+                R.id.questionFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+                R.id.exitDialog -> {
+                    toolbar.visibility = View.GONE
+                }
+                R.id.resultsFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+                else -> {
+                    toolbar.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -2,11 +2,15 @@ package com.multi.trivia.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.multi.trivia.data.model.User
+import androidx.room.TypeConverters
+import com.multi.trivia.data.database.converter.DateConverter
+import com.multi.trivia.data.database.dao.ScoreDao
+import com.multi.trivia.data.model.Score
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [Score::class], version = 1)
+@TypeConverters(DateConverter::class)
 abstract class TriviaDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
+    abstract fun scoreDao(): ScoreDao
 
 }

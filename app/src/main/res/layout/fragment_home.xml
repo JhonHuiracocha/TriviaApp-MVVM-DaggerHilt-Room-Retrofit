@@ -3,14 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="user"
-            type="com.multi.trivia.data.model.User" />
-
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,53 +10,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-
-            <LinearLayout
-                android:id="@+id/greetingContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/greeting"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@{user.username}"
-                    android:textColor="@color/primaryColor"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvSelectCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/select_category"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/greetingContainer" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

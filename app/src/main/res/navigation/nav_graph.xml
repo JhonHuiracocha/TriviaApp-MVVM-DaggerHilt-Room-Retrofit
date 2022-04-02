@@ -12,45 +12,15 @@
         tools:layout="@layout/fragment_welcome">
 
         <action
-            android:id="@+id/action_welcomeFragment_to_leaderboardFragment"
-            app:destination="@id/leaderboardFragment"
+            android:id="@+id/action_welcomeFragment_to_scoreFragment"
+            app:destination="@id/scoreFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
         <action
-            android:id="@+id/action_welcomeFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/leaderboardFragment"
-        android:name="com.multi.trivia.ui.leaderboard.LeaderboardFragment"
-        android:label="Leaderboard"
-        tools:layout="@layout/fragment_leaderboard" />
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.multi.trivia.ui.auth.login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
+            android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -60,22 +30,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.multi.trivia.ui.auth.register.RegisterFragment"
-        android:label="Register"
-        tools:layout="@layout/fragment_register">
-
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-
-    </fragment>
+        android:id="@+id/scoreFragment"
+        android:name="com.multi.trivia.ui.score.ScoreFragment"
+        android:label="Your scores"
+        tools:layout="@layout/fragment_score" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -101,11 +59,12 @@
 
         <action
             android:id="@+id/action_settingsFragment_to_quizFragment"
-            app:destination="@id/quizFragment"
+            app:destination="@id/questionFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
         <argument
             android:name="category"
             app:argType="com.multi.trivia.data.model.Category" />
@@ -113,7 +72,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/quizFragment"
+        android:id="@+id/questionFragment"
         android:name="com.multi.trivia.ui.quiz.question.QuestionFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_question">
@@ -129,6 +88,13 @@
         <argument
             android:name="questions"
             app:argType="com.multi.trivia.data.model.Question[]" />
+
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_questionFragment_to_exitQuizDialog"
+            app:destination="@id/exitDialog" />
 
     </fragment>
 
@@ -158,6 +124,25 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
 
+        <argument
+            android:name="points"
+            app:argType="integer" />
+
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+
     </fragment>
+
+    <dialog
+        android:id="@+id/exitDialog"
+        android:name="com.multi.trivia.ui.quiz.exit.ExitDialog"
+        android:label="ExitQuizDialog" >
+        <action
+            android:id="@+id/action_exitQuizDialog_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 
 </navigation>
