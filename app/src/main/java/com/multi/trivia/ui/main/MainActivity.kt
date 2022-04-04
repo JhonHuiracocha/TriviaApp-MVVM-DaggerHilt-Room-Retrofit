@@ -3,6 +3,7 @@ package com.multi.trivia.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.welcomeFragment -> {
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.questionFragment -> {
                     toolbar.visibility = View.GONE
                 }
-                R.id.exitDialog -> {
+                R.id.confirmDialog -> {
                     toolbar.visibility = View.GONE
                 }
                 R.id.resultsFragment -> {

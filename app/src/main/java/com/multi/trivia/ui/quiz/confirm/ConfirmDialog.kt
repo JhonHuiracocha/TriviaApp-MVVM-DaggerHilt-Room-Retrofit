@@ -1,4 +1,4 @@
-package com.multi.trivia.ui.quiz.exit
+package com.multi.trivia.ui.quiz.confirm
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 
-class ExitDialog : DialogFragment() {
+class ConfirmDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 

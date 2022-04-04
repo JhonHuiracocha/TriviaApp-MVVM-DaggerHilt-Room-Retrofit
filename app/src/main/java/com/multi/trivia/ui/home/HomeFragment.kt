@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView(view, categoryList)
+        initRecyclerView(categoryList)
 
     }
 
@@ -51,16 +51,16 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun initRecyclerView(view: View, categoryList: List<Category>) {
+    private fun initRecyclerView(categoryList: List<Category>) {
 
         val categoryAdapter = CategoryAdapter(categoryList)
 
         binding.rvCategories.apply {
             adapter = categoryAdapter
-            layoutManager = LinearLayoutManager(view.context)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(
                 DividerItemDecoration(
-                    view.context,
+                    context,
                     DividerItemDecoration.VERTICAL
                 )
             )

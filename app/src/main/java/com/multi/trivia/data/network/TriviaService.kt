@@ -13,6 +13,7 @@ interface TriviaService {
         @Query("category") category: Long,
         @Query("difficulty") difficulty: String,
         @Query("type") type: String,
+        @Query("encode") encode: String
     ): Response<QuizResponse>
 
 }

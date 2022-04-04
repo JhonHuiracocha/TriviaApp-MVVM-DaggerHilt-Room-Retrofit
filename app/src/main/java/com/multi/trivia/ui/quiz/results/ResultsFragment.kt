@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.multi.trivia.data.model.Score
 import com.multi.trivia.databinding.FragmentResultsBinding
+import com.multi.trivia.ui.quiz.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
 
@@ -21,7 +22,7 @@ class ResultsFragment : Fragment() {
     private var _binding: FragmentResultsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ResultsViewModel
+    private lateinit var viewModel: QuizViewModel
 
     private val args: ResultsFragmentArgs by navArgs()
 
@@ -46,13 +47,14 @@ class ResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val points = args.points
+        val scorePoints = args.score
         val categoryName = args.categoryName
-        val score = Score(0, points, categoryName, Date())
+        val totalQuestions = args.totalQuestions
+        val score = Score(0, scorePoints, totalQuestions, categoryName, Date())
 
-        binding.points = points.toString()
+        binding.points = scorePoints.toString()
 
-        viewModel = ViewModelProvider(this)[ResultsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[QuizViewModel::class.java]
 
         viewModel.insert(score)
 
@@ -75,11 +77,6 @@ class ResultsFragment : Fragment() {
 
         binding.btnPlayAgain.setOnClickListener {
             val action = ResultsFragmentDirections.actionResultsFragmentToHomeFragment()
-            findNavController().navigate(action)
-        }
-
-        binding.btnExit.setOnClickListener {
-            val action = ResultsFragmentDirections.actionResultsFragmentToWelcomeFragment()
             findNavController().navigate(action)
         }
 

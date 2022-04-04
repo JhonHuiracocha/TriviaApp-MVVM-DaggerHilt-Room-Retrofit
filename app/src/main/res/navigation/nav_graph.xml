@@ -92,9 +92,14 @@
         <argument
             android:name="categoryName"
             app:argType="string" />
+
         <action
-            android:id="@+id/action_questionFragment_to_exitQuizDialog"
-            app:destination="@id/exitDialog" />
+            android:id="@+id/action_questionFragment_to_confirmQuizDialog"
+            app:destination="@id/confirmDialog" />
+
+        <argument
+            android:name="type"
+            app:argType="string" />
 
     </fragment>
 
@@ -125,21 +130,24 @@
             app:popUpToInclusive="true" />
 
         <argument
-            android:name="points"
+            android:name="score"
             app:argType="integer" />
 
         <argument
             android:name="categoryName"
             app:argType="string" />
+        <argument
+            android:name="totalQuestions"
+            app:argType="integer" />
 
     </fragment>
 
     <dialog
-        android:id="@+id/exitDialog"
-        android:name="com.multi.trivia.ui.quiz.exit.ExitDialog"
-        android:label="ExitQuizDialog" >
+        android:id="@+id/confirmDialog"
+        android:name="com.multi.trivia.ui.quiz.confirm.ConfirmDialog"
+        android:label="Confirm">
         <action
-            android:id="@+id/action_exitQuizDialog_to_homeFragment"
+            android:id="@+id/action_confirmDialog_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />

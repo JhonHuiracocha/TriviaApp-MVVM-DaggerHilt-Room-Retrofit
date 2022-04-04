@@ -7,7 +7,7 @@
 
         <variable
             name="question"
-            type="com.multi.trivia.data.model.Question" />
+            type="String" />
 
         <variable
             name="currentQuestion"
@@ -30,48 +30,96 @@
                 android:id="@+id/tvNumberQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
                 android:text="@{currentQuestion}"
                 android:textColor="@color/primaryLightColor"
-                android:textSize="16sp"
+                android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/divider"
+            <Button
+                android:id="@+id/btnSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor"
+                android:text="@string/skip"
+                android:textColor="@color/primaryColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvNumberQuestion"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/primaryLightColor"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNumberQuestion" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNumberQuestion" />
 
             <TextView
                 android:id="@+id/tvQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_shape"
-                android:lineSpacingExtra="5dp"
+                android:lineSpacingExtra="3dp"
                 android:maxWidth="150dp"
                 android:padding="20dp"
-                android:text="@{question.question}"
+                android:text="@{question}"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/radioGroup"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider" />
+                app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_below="@+id/tvQuestion"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btnNext"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvQuestion" />
+                app:layout_constraintTop_toBottomOf="@id/tvQuestion">
+
+                <RadioButton
+                    android:id="@+id/rbA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryLightColor"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryLightColor"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryLightColor"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/primaryLightColor"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
 
             <Button
                 android:id="@+id/btnNext"

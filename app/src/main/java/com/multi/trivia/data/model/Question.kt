@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class Question(
     @SerializedName("category") val category: String,
     @SerializedName("difficulty") val difficulty: String,
-    @SerializedName("question") val question: String,
-    @SerializedName("correct_answer") val correctAnswer: String,
-    @SerializedName("incorrect_answers") val incorrectAnswers: List<String>
+    @SerializedName("question") var question: String,
+    @SerializedName("correct_answer") var correctAnswer: String,
+    @SerializedName("incorrect_answers") var incorrectAnswers: List<String>
 ) : Parcelable

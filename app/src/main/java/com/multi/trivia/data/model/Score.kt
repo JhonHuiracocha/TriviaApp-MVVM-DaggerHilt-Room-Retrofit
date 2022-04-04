@@ -9,6 +9,7 @@ import java.util.Date
 data class Score(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "score_id") val id: Long,
     @ColumnInfo(name = "points") val points: Int,
+    @ColumnInfo(name = "total_questions") val totalQuestions: Int,
     @ColumnInfo(name = "category") val category: String,
     @ColumnInfo(name = "date") val date: Date?
 )

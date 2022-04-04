@@ -35,7 +35,7 @@
                     android:id="@+id/tvResults"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/your_points"
+                    android:text="@string/your_score"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/primaryLightColor"
@@ -66,17 +66,6 @@
                         android:text="@string/play_again"
                         android:textColor="@color/primaryColor"
                         app:strokeColor="@color/white" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnExit"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="15dp"
-                        android:text="@string/exit"
-                        android:textColor="@color/white"
-                        app:strokeColor="@color/white"
-                        app:strokeWidth="3dp" />
 
                 </LinearLayout>
 

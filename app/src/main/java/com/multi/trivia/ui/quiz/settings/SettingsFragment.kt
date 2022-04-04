@@ -116,8 +116,10 @@ class SettingsFragment : Fragment() {
                         val action =
                             SettingsFragmentDirections.actionSettingsFragmentToQuizFragment(
                                 questions,
-                                category.name
+                                category.name,
+                                typeSetting
                             )
+
                         findNavController().navigate(action)
 
                         return@observe

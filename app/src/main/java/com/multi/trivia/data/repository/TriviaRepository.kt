@@ -8,6 +8,6 @@ class TriviaRepository @Inject constructor(
 ) {
 
     suspend fun fetchQuiz(amount: Int, category: Long, difficulty: String, type: String) =
-        triviaService.fetchQuiz(amount, category, difficulty, type)
+        triviaService.fetchQuiz(amount, category, difficulty, type, "base64")
 
 }

@@ -35,7 +35,7 @@ class ScoreFragment : Fragment() {
         viewModel = ViewModelProvider(this)[ScoreViewModel::class.java]
 
         viewModel.getScores().observe(viewLifecycleOwner) { scoreList ->
-            initRecyclerView(view, scoreList)
+            initRecyclerView(scoreList)
         }
 
     }
@@ -45,16 +45,16 @@ class ScoreFragment : Fragment() {
         _binding = null
     }
 
-    private fun initRecyclerView(view: View, scoreList: List<Score>) {
+    private fun initRecyclerView(scoreList: List<Score>) {
 
         val scoreAdapter = ScoreAdapter(scoreList)
 
         binding.rvScores.apply {
             adapter = scoreAdapter
-            layoutManager = LinearLayoutManager(view.context)
+            layoutManager = LinearLayoutManager(context)
             addItemDecoration(
                 DividerItemDecoration(
-                    view.context,
+                    context,
                     DividerItemDecoration.VERTICAL
                 )
             )
