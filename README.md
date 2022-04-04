@@ -1,5 +1,3 @@
-<title>Trivia App</title>
-
 <h1 align="center">Trivia App built with Kotlin</h1>
 
 ## Screenshots
